@@ -15,8 +15,7 @@ module Main
     puts '2) Add deposite'
     puts '3) Delete deposit'
     puts '4) Delete depositor'
-    puts '5) Interest payment'
-    puts '6) Close Deposite'
+    puts '5) Refill deposit '
 
     begin
       action_id = Integer(gets.chomp)
@@ -33,10 +32,8 @@ module Main
       DepositManager.delete_deposit
     when ACTION_TYPES[:delete_depositor]
       DepositorManager.delete_depositor
-    # when ACTION_TYPES[:interest_payment]
-    #   Manager.interest_payment
-    # when ACTION_TYPES[:close_deposite]
-    #   Manager.close_deposite
+    when ACTION_TYPES[:refill]
+      DepositManager.refill
     else return
     end
 

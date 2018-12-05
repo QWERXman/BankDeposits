@@ -14,13 +14,7 @@ class Depositor
 
   end
 
-  # def to_s
-  #   @name +
-  #     ' ' + @soname +
-  #     ' ' + @patronumic +
-  #     ' ' + @phone +
-  #     ' ' + @home_phone +
-  #     ' ' + @address +
-  #     ' ' + @status
-  # end
+  def to_s
+    @id + ' ' + @name
+  end
 end

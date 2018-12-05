@@ -27,20 +27,114 @@ module FileReader
 
   # Adds a new contact to the file
   def self.add_depositor(depositor)
-    last_id = self.get_max_id()
+    last_id = self.get_max_id(DEPOSITORS_DB)
     CSV.open(DEPOSITORS_DB, 'a') do |file|
       file.add_row([last_id + 1, depositor.name])
     end
   end
 
-  # id of last depositor
-  def self.get_max_id
+  def self.add_deposit(deposit)
+    return if not find_depositor(deposit.id)
+
+    last_id = self.get_max_id(DEPOSITS_DB)
+    CSV.open(DEPOSITS_DB, 'a') do |file|
+      file.add_row([
+        last_id + 1,
+        deposit.name,
+        deposit.percent,
+        deposit.depositor_id,
+        deposit.amount,
+        deposit.date
+        ])
+    end
+  end
+
+  def self.delete_deposit(id)
+    table = CSV.table(DEPOSITS_DB)
+
+    table.delete_if do |row|
+      row[:id] == id
+    end
+
+    File.open(DEPOSITS_DB, 'w') do |file|
+      file.write(table.to_csv)
+    end
+  end
+
+  def self.delete_depositor(id)
     table = CSV.table(DEPOSITORS_DB)
+
+    table.delete_if do |row|
+      row[:id] == id
+    end
+
+    File.open(DEPOSITORS_DB, 'w') do |file|
+      file.write(table.to_csv)
+    end
+  end
+
+  # check depositor
+  def self.find_depositor(id)
+    table = CSV.table(DEPOSITORS_DB)
+    table.each do |row|
+      return true if row[:id] == id
+    end
+    false
+  end
+
+  # id of last depositor
+  def self.get_max_id(file_path)
+    table = CSV.table(file_path)
     id = 0
     table.each do |row|
       id = row[:id] if row[:id] > id
     end
     id
+  end
+
+  def self.get_depositors
+    depositors = []
+    CSV.foreach(DEPOSITORS_DB, headers: true) do |row|
+      depositors << Depositor.new(
+        row['id'],
+        row['name']
+      )
+    end
+    depositors
+  end
+
+  def self.refill_deposit(id, amount)
+    table = CSV.table(DEPOSITS_DB)
+
+    table.each do |row|
+      row[:amount] = row[:amount] + amount if row[:id] == id
+    end
+
+    File.open(DEPOSITS_DB, 'w') do |file|
+      file.write(table.to_csv)
+    end
+  end
+
+  def self.find_depositor_by_name(name)
+    table = CSV.table(DEPOSITORS_DB)
+    table.each do |row|
+      return row[:id] if row[:name] == name
+    end
+  end
+
+  def self.get_deposits_by_depositor(id)
+    deposits = []
+    CSV.foreach(DEPOSITS_DB, headers: true) do |row|
+      deposits << Deposit.new(
+        row['id'],
+        row['name'],
+        row['percent'],
+        row['depositor_id'],
+        row['amount'],
+        row['date']
+      ) if row['depositor_id'].to_s == id.to_s
+    end
+    deposits
   end
 
 end

@@ -1,8 +1,12 @@
 # Deposit
 class Deposit
-  attr_accessor :name, :percent, :type, :amount, :date
+  attr_accessor :id, :name, :percent, :amount, :date, :depositor_id
 
-  def initialize(name, percent, can_replenish = true)
+  def initialize(id, name, percent, depositor_id, amount, date)
+
+    # Primary key
+    @id = id
+
     # First name
     # type: string
     # @require
@@ -13,13 +17,9 @@ class Deposit
     # @require
     @percent = percent
 
-    # Possibility of replenishment
-    # type: bolean
-    @can_replenish = can_replenish
-
-    # Type of deposit
-    # type: enum
-    @type = type
+    # Id of depositor
+    # type: int
+    @depositor_id = depositor_id
 
     # Balance
     # type: int
@@ -33,9 +33,10 @@ class Deposit
 
   def prepare_for_file_write
     [
+      @id,
       @name,
       @percent,
-      @type,
+      @depositor_id,
       @amount,
       @date
     ]
