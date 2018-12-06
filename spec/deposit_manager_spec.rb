@@ -1,15 +1,48 @@
-require 'deposit_manager'
-require 'deposit'
+require_relative('../bin./deposit_manager')
+require_relative('../bin./deposit')
 
-RSpec.describe Dao do
-  include Dao
+RSpec.describe DepositManager do
+  include DepositManager
 
-  describe '#shedule_create' do
-    it 'creates the correct schedule from a file' do
-      file_path = './spec/test_base.yml'
-      file_item_first = SheduleItem.new('Monday', 4, 'Mathematics', 220, 'IT-32')
-      file_item_sec = SheduleItem.new('Wednesday', 1, 'History', 400, 'PMI-11')
-      expect(shedule_create(file_path).items).to eq([file_item_first, file_item_sec])
+  describe '#add_deposit' do
+    it 'add deposit to file' do
+      expect($stdin).to receive(:gets).and_return('test_name', '12', '1', '32')
+      expect(DepositManager.add_deposit()).to eq(true)
     end
   end
+
+  describe '#delete_deposit' do
+    it 'delete deposit from file' do
+      expect($stdin).to receive(:gets).and_return('1')
+      expect(DepositManager.delete_deposit()).to eq(1)
+    end
+  end
+
+  describe '#refill' do
+    it 'refill deposit' do
+      expect($stdin).to receive(:gets).and_return('test_name', '1')
+      expect(DepositManager.refill()).to eq(true)
+    end
+  end
+
+  describe '#refill_dep' do
+    it 'refill deposit by id' do
+      expect($stdin).to receive(:gets).and_return('1')
+      expect(DepositManager.refill_dep(1)).to eq(true)
+    end
+  end
+
+  # describe '#delete_depositor' do
+  #   it 'delete depositor from file' do
+  #     expect($stdin).to receive(:gets).and_return('1')
+  #     expect(DepositorManager.delete_depositor()).to eq(1)
+  #   end
+  # end
+  #
+  # describe '#show_depositors' do
+  #   it 'show_depositors' do
+  #     expect(DepositorManager.show_depositors()).to eq(true)
+  #   end
+  # end
+
 end

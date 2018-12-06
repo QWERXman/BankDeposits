@@ -22,7 +22,7 @@ module Main
     show_menu
   end
 
-  def show_interface
+  def self.show_interface
     puts 'Select action'
     puts '1) Add depositor'
     puts '2) Add deposite'
@@ -31,7 +31,7 @@ module Main
     puts '5) Refill deposit '
   end
 
-  def select_action(action_id)
+  def self.select_action(action_id)
     case action_id
     when ACTION_TYPES[:add_deposit]
       DepositorManager.add_depositor

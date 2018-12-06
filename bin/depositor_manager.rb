@@ -7,9 +7,10 @@ module DepositorManager
   def self.add_depositor
     puts 'Enter depositor name:'
 
-    name = gets.chomp
+    name = $stdin.gets.chomp
 
     FileReader.add_depositor(Depositor.new(1, name))
+    true
   end
 
   def self.show_depositors
@@ -17,11 +18,13 @@ module DepositorManager
     deps.each do |dep|
       puts dep.to_s
     end
+    true
   end
 
   def self.delete_depositor
     puts 'Enter depositor id:'
-    id = Integer(gets.chomp)
+    id = Integer($stdin.gets.chomp)
     FileReader.delete_depositor(id)
+    id
   end
 end
