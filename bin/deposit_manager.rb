@@ -32,7 +32,7 @@ module DepositManager
     deps = show_deposits_by_depositor(dep_id)
     puts 'Enter deposit id:'
     deposit_id = Integer(gets.chomp)
-    self.refill_dep(deposit_id) if deps.include? deposit_id.to_s
+    refill_dep(deposit_id) if deps.include? deposit_id.to_s
   end
 
   def self.show_deposits_by_depositor(id)
