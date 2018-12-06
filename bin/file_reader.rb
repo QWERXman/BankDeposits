@@ -27,25 +27,23 @@ module FileReader
 
   # Adds a new contact to the file
   def self.add_depositor(depositor)
-    last_id = self.get_max_id(DEPOSITORS_DB)
+    last_id = get_max_id(DEPOSITORS_DB)
     CSV.open(DEPOSITORS_DB, 'a') do |file|
       file.add_row([last_id + 1, depositor.name])
     end
   end
 
   def self.add_deposit(deposit)
-    return if not find_depositor(deposit.id)
+    return unless find_depositor(deposit.id)
 
-    last_id = self.get_max_id(DEPOSITS_DB)
+    last_id = get_max_id(DEPOSITS_DB)
     CSV.open(DEPOSITS_DB, 'a') do |file|
-      file.add_row([
-        last_id + 1,
-        deposit.name,
-        deposit.percent,
-        deposit.depositor_id,
-        deposit.amount,
-        deposit.date
-        ])
+      file.add_row([last_id + 1,
+                    deposit.name,
+                    deposit.percent,
+                    deposit.depositor_id,
+                    deposit.amount,
+                    deposit.date])
     end
   end
 
@@ -92,7 +90,7 @@ module FileReader
     id
   end
 
-  def self.get_depositors
+  def self.read_depositors
     depositors = []
     CSV.foreach(DEPOSITORS_DB, headers: true) do |row|
       depositors << Depositor.new(
@@ -125,16 +123,17 @@ module FileReader
   def self.get_deposits_by_depositor(id)
     deposits = []
     CSV.foreach(DEPOSITS_DB, headers: true) do |row|
-      deposits << Deposit.new(
-        row['id'],
-        row['name'],
-        row['percent'],
-        row['depositor_id'],
-        row['amount'],
-        row['date']
-      ) if row['depositor_id'].to_s == id.to_s
+      if row['depositor_id'].to_s == id.to_s
+        deposits << Deposit.new(
+          row['id'],
+          row['name'],
+          row['percent'],
+          row['depositor_id'],
+          row['amount'],
+          row['date']
+        )
+      end
     end
     deposits
   end
-
 end

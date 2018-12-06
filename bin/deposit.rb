@@ -3,7 +3,6 @@ class Deposit
   attr_accessor :id, :name, :percent, :amount, :date, :depositor_id
 
   def initialize(id, name, percent, depositor_id, amount, date)
-
     # Primary key
     @id = id
 
@@ -28,7 +27,6 @@ class Deposit
     # Date of deposit
     # type: bolean
     @date = date
-
   end
 
   def prepare_for_file_write

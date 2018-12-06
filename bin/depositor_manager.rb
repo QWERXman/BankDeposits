@@ -1,8 +1,8 @@
 require_relative('./deposit')
 require_relative('./file_reader')
 
+# Depositor Manager
 module DepositorManager
-
   # Add a depositor
   def self.add_depositor
     puts 'Enter depositor name:'
@@ -13,7 +13,7 @@ module DepositorManager
   end
 
   def self.show_depositors
-    deps = FileReader.get_depositors()
+    deps = FileReader.read_depositors
     deps.each do |dep|
       puts dep.to_s
     end

@@ -2,4 +2,4 @@ id,name,percent,depositor_id,amount,date
 1,dep_name,12,1,123,06.12.18
 3,dep_name,12,2,123,06.12.18
 4,dep_name,12,2,123,06.12.18
-5,new_dep,54,4,432,06.12.18
+5,new_dep,54,4,444,06.12.18
