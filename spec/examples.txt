@@ -1,9 +1,12 @@
-example_id                              | status | run_time        |
---------------------------------------- | ------ | --------------- |
-./spec/deposit_manager_spec.rb[1:1:1]   | passed | 0.0161 seconds  |
-./spec/deposit_manager_spec.rb[1:2:1]   | passed | 0.00719 seconds |
-./spec/deposit_manager_spec.rb[1:3:1]   | passed | 0.00226 seconds |
-./spec/deposit_manager_spec.rb[1:4:1]   | passed | 0.00662 seconds |
-./spec/depositor_manager_spec.rb[1:1:1] | passed | 0.0083 seconds  |
-./spec/depositor_manager_spec.rb[1:2:1] | passed | 0.15442 seconds |
-./spec/depositor_manager_spec.rb[1:3:1] | passed | 0.00439 seconds |
+example_id                               | status | run_time        |
+---------------------------------------- | ------ | --------------- |
+./spec/deposit_manager_spec.rb[1:1:1]    | passed | 0.0161 seconds  |
+./spec/deposit_manager_spec.rb[1:2:1]    | passed | 0.00719 seconds |
+./spec/deposit_manager_spec.rb[1:3:1]    | passed | 0.00226 seconds |
+./spec/deposit_manager_spec.rb[1:4:1]    | passed | 0.00662 seconds |
+./spec/depositor_manager_spec.rb[1:1:1]  | passed | 0.0083 seconds  |
+./spec/depositor_manager_spec.rb[1:2:1]  | passed | 0.15442 seconds |
+./spec/depositor_manager_spec.rb[1:3:1]  | passed | 0.00439 seconds |
+./spec/system/add_deposit_spec.rb[1:1]   | passed | 0.35132 seconds |
+./spec/system/add_depositor_spec.rb[1:1] | passed | 0.03013 seconds |
+./spec/system/deposits_list_spec.rb[1:1] | passed | 0.01771 seconds |

@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
-gem 'rspec', '~> 3.0'
-gem 'rubocop', require: false
-gem 'simplecov', require: false, group: :test
+group :development, :test do
+  gem 'rspec'
+  gem 'rubocop'
+  gem 'simplecov'
+
+  gem 'capybara'
+  gem 'rake'
+end
+
 gem 'sinatra'
 gem 'sinatra-contrib'
