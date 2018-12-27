@@ -20,6 +20,10 @@ module DepositManager
     true
   end
 
+  def self.new_deposit(deposit)
+    FileReader.add_deposit(deposit)
+  end
+
   def self.delete_deposit
     puts 'Enter deposit id:'
     id = Integer($stdin.gets.chomp)
@@ -39,7 +43,7 @@ module DepositManager
   end
 
   def self.show_deposits_by_depositor(id)
-    deps = FileReader.get_deposits_by_depositor(id)
+    deps = FileReader._get_deposits_by_depositor(id)
     deps_ids = []
     deps.each do |dep|
       puts dep.id + ' ' + dep.name
@@ -53,5 +57,17 @@ module DepositManager
     amount = Integer($stdin.gets.chomp)
     FileReader.refill_deposit(deposit_id, amount)
     true
+  end
+
+  def self._get_deposit(id)
+    FileReader.find_deposit(id)
+  end
+
+  def self._get_deposits_list
+    FileReader._get_deposits_list
+  end
+
+  def self.edit_deposit(id, deposit)
+    FileReader.edit_deposit(id, deposit)
   end
 end

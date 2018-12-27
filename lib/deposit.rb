@@ -39,13 +39,8 @@ class Deposit
       @date
     ]
   end
-  # def to_s
-  #   @name +
-  #     ' ' + @soname +
-  #     ' ' + @patronumic +
-  #     ' ' + @phone +
-  #     ' ' + @home_phone +
-  #     ' ' + @address +
-  #     ' ' + @status
-  # end
+
+  def to_s
+    @name.to_s + @id.to_s + @percent.to_s
+  end
 end

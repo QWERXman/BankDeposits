@@ -1,0 +1,42 @@
+<div class="grid-x grid-padding-x">
+  <div class="large-12 cell">
+    <h3>
+      Введите данные для изменения вкладчика
+    </h3>
+  </div>
+</div>
+
+<form method="post">
+  <div class="grid-x grid-padding-x">
+    <div class="medium-6 cell">
+      <label>Название
+        <input type="text" placeholder="Иван" name="name" value="<%= @deposit.name %>">
+      </label>
+    </div>
+    <div class="medium-6 cell">
+      <label>Процент
+        <input type="text" placeholder="12" name="percent" value="<%= @deposit.percent %>" required pattern="^[0-9]+.?[0-9]+$">
+      </label>
+    </div>
+    <div class="medium-6 cell">
+      <label>Id вкладчика
+        <input type="text" placeholder="5" name="Id вкладчика" value="<%= @deposit.depositor_id %>" required pattern="^[0-9]+$">
+      </label>
+    </div>
+    <div class="medium-6 cell">
+      <label>Баланс
+        <input type="text" placeholder="320" name="balance" value="<%= @deposit.amount %>" required pattern="^[0-9]+.?[0-9]+$">
+      </label>
+    </div>
+    <div class="medium-6 cell">
+      <label>Дата
+        <input type="text" placeholder="01.01.12" name="date" value="<%= @deposit.date %>" required pattern="^[0-9]{2}.[0-9]{2}.[0-9]{2}$">
+      </label>
+    </div>
+  </div>
+  <div class="grid-x grid-padding-x">
+    <div class="lagre-12 cell">
+      <input type="submit" value="Изменить" class="button success">
+    </div>
+  </div>
+</form>

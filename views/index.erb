@@ -1,0 +1,68 @@
+<div class="grid-x grid-padding-x">
+  <div class="large-7 cell">
+    <div class="large-6 cell">
+      <h3>Список вкладов</h3>
+    </div>
+    <div class="large-6 cell">
+      <a href="/deposits/add" class="button success">Добавить вклад</a>
+    </div>
+    <div class="grid-x grid-padding-x">
+      <div class="large-12 cell grid-x grid-padding-x">
+        <div class="large-1">№</div>
+        <div class="large-3">Название</div>
+        <div class="large-1">%</div>
+        <div class="large-1">id</div>
+        <div class="large-2">Сумма</div>
+        <div class="large-2">Дата</div>
+      </div>
+      <% @deposits.each.with_index do |deposit, index| %>
+        <div class="large-12 cell grid-x grid-padding-x">
+          <div class="large-1">
+            <%= index + 1 %>
+          </div>
+          <div class="large-3">
+            <%= deposit.name %>
+          </div>
+          <div class="large-1">
+            <%= deposit.percent %>
+          </div>
+          <div class="large-1">
+            <%= deposit.depositor_id %>
+          </div>
+          <div class="large-2">
+            <%= deposit.amount %>
+          </div>
+          <div class="large-2">
+            <%= deposit.date %>
+          </div>
+          <div class="large-1">
+            <a href="deposits/edit/<%= deposit.id %>">редактировать</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="large-5 cell">
+    <div class="large-6 cell">
+      <h3>Список вкладчиков</h3>
+    </div>
+    <div class="large-6 cell">
+      <a href="/depositors/add" class="button success">Добавить вкладчика</a>
+    </div>
+    <div class="grid-x grid-padding-x">
+      <% @depositors.each.with_index do |depositor, index| %>
+        <div class="large-12 grid-x grid-padding-x">
+          <div class="large-1">
+            <%= index + 1 %>
+          </div>
+          <div class="large-6">
+            <%= depositor.name %>
+          </div>
+          <div class="large-2">
+            <a href="depositors/edit/<%= depositor.id %>">редактировать</a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

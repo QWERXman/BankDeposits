@@ -1,42 +1,21 @@
 require 'csv'
 require_relative('./depositor')
+require_relative('./deposit')
 require_relative('./constants')
 # require_relative('./helpers')
 
 # Module for working with files
 module FileReader
-  # Read contacts from a file
-  # Returns an array of contacts
-  # def self.read_contacts
-  #   contacts = []
-  #
-  #   CSV.foreach(FILE_NAME, headers: true) do |row|
-  #     contacts << Contact.new(
-  #       row['name'],
-  #       row['soname'],
-  #       row['patronumic'],
-  #       row['phone'],
-  #       row['homephone'],
-  #       row['address'],
-  #       row['status']
-  #     )
-  #   end
-  #
-  #   contacts
-  # end
-
   # Adds a new contact to the file
   def self.add_depositor(depositor)
-    last_id = get_max_id(DEPOSITORS_DB)
+    last_id = _get_max_id(DEPOSITORS_DB)
     CSV.open(DEPOSITORS_DB, 'a') do |file|
       file.add_row([last_id + 1, depositor.name])
     end
   end
 
   def self.add_deposit(deposit)
-    return unless find_depositor(deposit.id)
-
-    last_id = get_max_id(DEPOSITS_DB)
+    last_id = _get_max_id(DEPOSITS_DB)
     CSV.open(DEPOSITS_DB, 'a') do |file|
       file.add_row([last_id + 1,
                     deposit.name,
@@ -81,7 +60,7 @@ module FileReader
   end
 
   # id of last depositor
-  def self.get_max_id(file_path)
+  def self._get_max_id(file_path)
     table = CSV.table(file_path)
     id = 0
     table.each do |row|
@@ -120,7 +99,7 @@ module FileReader
     end
   end
 
-  def self.get_deposits_by_depositor(id)
+  def self._get_deposits_by_depositor(id)
     deposits = []
     CSV.foreach(DEPOSITS_DB, headers: true) do |row|
       if row['depositor_id'].to_s == id.to_s
@@ -135,5 +114,84 @@ module FileReader
       end
     end
     deposits
+  end
+
+  def self._get_deposits_list
+    deposits = []
+    CSV.foreach(DEPOSITS_DB, headers: true) do |row|
+      deposits << Deposit.new(
+        row['id'],
+        row['name'],
+        row['percent'],
+        row['depositor_id'],
+        row['amount'],
+        row['date']
+      )
+    end
+    deposits
+  end
+
+  def self.__get_depositors_list
+    depositors = []
+    CSV.foreach(DEPOSITS_DB, headers: true) do |row|
+      depositors << Depositor.new(
+        row['id'],
+        row['name']
+      )
+    end
+    depositors
+  end
+
+  def self.edit_deposit(id, deposit)
+    table = CSV.table(DEPOSITS_DB)
+
+    table.each do |row|
+      if row[:id].to_s == id.to_s
+        row[:name] = deposit.name
+        row[:percent] = deposit.percent
+        row[:depositor_id] = deposit.depositor_id
+        row[:amount] = deposit.amount
+        row[:date] = deposit.date
+      end
+    end
+
+    File.open(DEPOSITS_DB, 'w') do |file|
+      file.write(table.to_csv)
+    end
+  end
+
+  def self.find_deposit(id)
+    table = CSV.table(DEPOSITS_DB)
+    table.each do |row|
+      if row[:id].to_s == id.to_s
+        return Deposit.new(
+          row[:id],
+          row[:name],
+          row[:percent],
+          row[:depositor_id],
+          row[:amount],
+          row[:date]
+        )
+      end
+    end
+  end
+
+  def self._get_depositor(id)
+    table = CSV.table(DEPOSITORS_DB)
+    table.each do |row|
+      return Depositor.new(row[:id], row[:name]) if row[:id].to_s == id.to_s
+    end
+  end
+
+  def self.edit_depositor(id, depositor)
+    table = CSV.table(DEPOSITORS_DB)
+
+    table.each do |row|
+      row[:name] = depositor.name if row[:id].to_s == id.to_s
+    end
+
+    File.open(DEPOSITORS_DB, 'w') do |file|
+      file.write(table.to_csv)
+    end
   end
 end
