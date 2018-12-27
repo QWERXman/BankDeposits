@@ -1,5 +1,5 @@
-require_relative('../lib./deposit_manager')
-require_relative('../lib./deposit')
+require_relative('../../lib./deposit_manager')
+require_relative('../../lib./deposit')
 
 RSpec.describe DepositManager do
   include DepositManager

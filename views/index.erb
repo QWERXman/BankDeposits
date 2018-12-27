@@ -36,7 +36,7 @@
             <%= deposit.date %>
           </div>
           <div class="large-1">
-            <a href="deposits/edit/<%= deposit.id %>">редактировать</a>
+            <a href="deposits/edit/<%= deposit.id %>" id="deposit-id-<%= index %>">редактировать</a>
           </div>
         </div>
       <% end %>
@@ -59,7 +59,7 @@
             <%= depositor.name %>
           </div>
           <div class="large-2">
-            <a href="depositors/edit/<%= depositor.id %>">редактировать</a>
+            <a href="depositors/edit/<%= depositor.id %>" id="depositor-id-<%= index %>">редактировать</a>
           </div>
         </div>
       <% end %>
