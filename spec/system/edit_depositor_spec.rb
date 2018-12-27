@@ -9,5 +9,4 @@ RSpec.describe 'edit depositor', type: :feature do
     click_on('Изменить')
     expect(page).to have_content('Иван')
   end
-
 end

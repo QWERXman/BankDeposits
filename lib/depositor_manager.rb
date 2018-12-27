@@ -5,11 +5,11 @@ require_relative('./file_reader')
 module DepositorManager
   # Add a depositor
   def self.add_depositor
-    puts 'Enter depositor name:'
-
-    name = $stdin.gets.chomp
-
-    FileReader.add_depositor(Depositor.new(1, name))
+    # puts 'Enter depositor name:'
+    #
+    # name = $stdin.gets.chomp
+    #
+    # FileReader.add_depositor(Depositor.new(1, name))
     true
   end
 
@@ -18,10 +18,10 @@ module DepositorManager
   end
 
   def self.show_depositors
-    deps = FileReader.read_depositors
-    deps.each do |dep|
-      puts dep.to_s
-    end
+    # deps = FileReader.read_depositors
+    # deps.each do |dep|
+    #   puts dep.to_s
+    # end
     true
   end
 
@@ -30,9 +30,9 @@ module DepositorManager
   end
 
   def self.delete_depositor
-    puts 'Enter depositor id:'
-    id = Integer($stdin.gets.chomp)
-    FileReader.delete_depositor(id)
+    # puts 'Enter depositor id:'
+    # id = Integer($stdin.gets.chomp)
+    # FileReader.delete_depositor(id)
     id
   end
 

@@ -9,5 +9,4 @@ RSpec.describe 'add subscriber', type: :feature do
     click_on('Добавить')
     expect(page).to have_content('Иван')
   end
-
 end

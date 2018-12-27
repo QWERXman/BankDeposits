@@ -17,5 +17,4 @@ RSpec.describe 'edit depositor', type: :feature do
     expect(page).to have_content('980')
     expect(page).to have_content('09.09.19')
   end
-
 end

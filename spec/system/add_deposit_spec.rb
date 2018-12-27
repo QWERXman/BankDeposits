@@ -17,5 +17,4 @@ RSpec.describe 'add subscriber', type: :feature do
     expect(page).to have_content('975')
     expect(page).to have_content('20.12.18')
   end
-
 end
